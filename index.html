@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.upload-1.0.2.min.js"></script>
+    <title>HTML Media Capture Demo</title>
+<script>
+window.addEventListener("load", function(){
+
+  if (!window.File){
+    alert("Undefined File API");
+    return;
+  }
+
+  document.getElementById("imageFile").addEventListener("change", function(){
+    var reader = new FileReader();
+
+    reader.onload = function(event){
+      document.getElementById("image").src = reader.result;
+    }
+    var file = document.getElementById("imageFile").files[0];
+    reader.readAsDataURL(file);
+  }, true);
+
+
+
+  $("#upload").click(function() {
+       $("#imageFile").upload("post_file.pl", function(data) {
+       if(data.status === "OK"){
+         console.log(data);
+         alert("OK");
+        }else{
+         alert("there was an error");
+       }
+     }, "json");
+   });
+
+}, true);
+
+
+</script>
+  </head>
+
+  <body>
+    <form>
+      <input type="file" accept="image/*;capture=camera" id="imageFile" name="cameraData"/>
+    </form>
+  </body>
+  <img id="image"width="200" height="200"><br>
+  <button type="button" id="upload" class="">upload</button>
+
+  <br><br>
+  <a href="./show.php">show page</a>
+</html>
