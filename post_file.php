@@ -1,12 +1,5 @@
 <?php
 
-$handle = fopen('tmp/log', 'a+');
-fwrite($handle, 'hello');
-
-$files = var_export($_FILES, true);
-$post = var_export($_POST, true);
-fwrite($handle, PHP_EOL. $files .PHP_EOL);
-
 $filename = basename($_FILES['cameraData']['name']);
 $is_image = preg_match('/^image\//', $_FILES['cameraData']['type']);
 if ($is_image) {
