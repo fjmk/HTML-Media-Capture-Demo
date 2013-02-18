@@ -28,12 +28,12 @@ window.addEventListener("load", function(){
 
 
   $("#upload").click(function() {
-       $("#imageFile").upload("post_file.pl", function(data) {
+       $("#imageFile").upload("post_file.php", function(data) {
        if(data.status === "OK"){
          console.log(data);
          alert("OK");
         }else{
-         alert("there was an error");
+         alert(data.status);
        }
      }, "json");
    });
